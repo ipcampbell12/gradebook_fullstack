@@ -1,6 +1,15 @@
 from app import db
 from datetime import datetime
 
+student_assessment = db.Table(
+    'student_assessment',
+    db.Column('id', db.Integer, nullable=False, primary_key=True),
+    db.Column('student_id', db.Integer, db.ForeignKey('students.id')),
+    db.Column('assessment_id', db.Integer, db.ForeignKey('assessments.id')),
+    db.Column('score', db.Integer)
+
+)
+
 
 class Teacher(db.Model):
     __tablename__ = 'teachers'
@@ -33,25 +42,3 @@ class Assessments(db.Model):
     name = db.Column(db.String(80), nullable=False)
     date = db.Column(db.DateTiem, default=datetime.utcnow)
     subject_id = db.column(db.Integer, db.ForeignKey('subjects.id'))
-
-
-""" 
-
-CREATE TABLE assessments (
-	id SERIAL,
-	name TEXT,
-    date DATETIME,
-	subject_id INTEGER,
-	PRIMARY KEY(id),
-	FOREIGN KEY(subject_id) REFERENCES subjects(id)
-);
-
-CREATE TABLE students_assessments (
-	id SERIAL,
-	student_id INTEGER,
-    assessment_id INTEGER,
-    score INTEGER,
-	PRIMARY KEY(id),
-	FOREIGN KEY(student_id) REFERENCES students(id),
-	FOREIGN KEY(assessment_id) REFERENCES assessments(id)
-); """
