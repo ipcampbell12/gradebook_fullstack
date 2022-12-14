@@ -143,4 +143,13 @@ JOIN teachers t
 ON t.id = s.teacher_id
 WHERE t.last = 'Calderon'; 
 
+--Get the scores and and student names and teacher names for the first test
+SELECT CONCAT(s.first,' ', s.last) AS student, t.last AS teacher, sa.score, a.name FROM students s
+JOIN teachers t
+ON s.teacher_id = t.id
+JOIN students_assessments sa
+ON s.id = sa.student_id
+JOIN assessments a 
+ON a.id = sa.assessment_id
+WHERE a.name LIKE '%1%';
 
