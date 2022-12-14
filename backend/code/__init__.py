@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
-from .instance import config
+
 
 db = SQLAlchemy()
 DB_NAME = 'gradebook.db'
@@ -20,7 +20,7 @@ def create_app(Config):
     return app
 
 
-def create_datavase(app):
+def create_database(app):
     if not path.exists('code/' + DB_NAME):
         db.create_all(app=app)
         print('database created!')
