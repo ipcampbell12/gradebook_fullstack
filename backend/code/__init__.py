@@ -17,10 +17,7 @@ def create_app(Config):
 
     from .models import Teacher, Student, Subject, Assessment, student_assessment
 
+    with app.app_context():
+        db.create_all()
+
     return app
-
-
-def create_database(app):
-    if not path.exists('code/' + DB_NAME):
-        db.create_all(app=app)
-        print('database created!')
