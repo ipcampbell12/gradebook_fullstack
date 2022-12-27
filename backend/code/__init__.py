@@ -15,9 +15,19 @@ def create_app(Config):
 
     db.init_app(app)
 
-    from .models import Teacher, Student, Subject, Assessment, student_assessment
-
     with app.app_context():
-        db.create_all()
 
-    return app
+        from .routes.assessment import assessment_bp
+        from .routes.student import student_bp
+        from .routes.subject import subject_bp
+        from .routes.teacher import teacher_bp
+        from .routes.home import home_bp
+
+        app.register_blueprint(assessment_bp, url_prefix='/assessment')
+        app.register_blueprint(student_bp, url_prefix='/student')
+        app.register_blueprint(subject_bp, url_prefix='/subject')
+        app.register_blueprint(teacher_bp, url_prefix='/teacher')
+        app.register_blueprint(home_bp, url_prefix='/home')
+
+        db.create_all()
+        return app

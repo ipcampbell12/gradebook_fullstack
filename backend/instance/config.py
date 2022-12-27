@@ -2,8 +2,12 @@
 from os import environ, path
 from dotenv import load_dotenv
 
+# don't know what this does
 
+# path to current file
 basedir = path.abspath(path.dirname(__file__))
+
+# connect to data stored in .env file
 load_dotenv(path.join(basedir, '.env'))
 
 
